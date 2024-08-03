@@ -1,2 +1,4 @@
 # imga
-This is a @NguyenAnhTuan1912's workshop in First Cloud Journey
+**imga** is a tool that helps you to extract content of a table to excel. Which run with **tesseract** as core.
+
+Developed by @NguyenAnhTuan1912
