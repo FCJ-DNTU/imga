@@ -6,8 +6,7 @@ There are some labs that I use and learn to build this project
 - Lab 000: ...
 
 ## Infrastructure
-This diagram describes how my system look like in Cloud.
-**INSERT IMAGE HERE**
+This diagram describes how my system look like in Cloud. The diagram will be inserted later.
 
 ## Technologies & Services
 I'll build the system and infrastructure with some technologies, tools and AWS services.
@@ -22,23 +21,24 @@ I'll build the system and infrastructure with some technologies, tools and AWS s
 - CDK
 
 ### Services
-- **Network**
+- **VPC**
 - **CloudFormation**
 - **EC2**
 - **S3**
 - **ECS**
-- Lambda (in the future version of this project)
-- API Gateway (in the future version of this project)
-- VPC Peering (in the future version of this project)
-- Amazon RDS (in the future version of this project)
-- Amazon Cognito (in the future version of this project)
-- ELB (in the future version of this project)
+- **IAM**
+- Lambda (_in the future version of this project_)
+- API Gateway (_in the future version of this project_)
+- VPC Peering (_in the future version of this project_)
+- Amazon RDS (_in the future version of this project_)
+- Amazon Cognito (_in the future version of this project_)
+- ELB (_in the future version of this project_)
 
 ### Environment
 - Docker
 - Cloud
 
-### Deployment
+### Deployment tools
 - Github Actions
 
 Developed by @NguyenAnhTuan1912
