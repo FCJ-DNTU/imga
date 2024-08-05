@@ -26,12 +26,7 @@ Note: _Remember, this diagram is just the first version of my application (this 
 I'll build the system and infrastructure with some technologies, tools, platforms and AWS services that are listed below.
 
 ### For frontend
-Users will interact with web application and receive result from web application. I decide to use this stack to build
-- `React`: use to build web app with ReactJS.
-- `Vite`: use to build React App. I may use this tool to build static files.
-- `Tailwindcss`: use to style web app.
-- `Zustand`: use for stage management.
-- `Axios`: use to handle api requests.
+Users will interact with web application and receive result from web application. I decide to use these technologies for building are `HTML`, `CSS`, `Javascript`, `Boostrap`.
 
 ### For backend
 - `Node`, `Express`: use to build
