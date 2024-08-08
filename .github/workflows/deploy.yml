@@ -18,35 +18,32 @@ defaults:
     shell: bash
 
 jobs:
-  prepare:
+  build_website:
     runs-on: ubuntu-latest
     steps:
       # Check out to repository
-      - uses: actions/checkout@v4
+      - name: Check to repository
+        uses: actions/checkout@v4
         with:
           submodules: recursive
 
       # Install NODEJS
-      - uses: actions/setup-node@v4
+      - name: Install NodeJS
+        uses: actions/setup-node@v4
         with:
           node-version: 20
 
       # Install dependencies
-      - run: npm install
+      - name: Install dependencies
+        run: npm install
 
-  build_website:
-    needs: prepare
-    runs-on: ubuntu-latest
-    steps:
       # Build website with webpack
       # The directory is build/gui
-      - run: npm run build
+      - name: Build website
+        run: npm run build
 
-  upload_to_s3:
-    needs: build_website
-    runs-on: ubuntu-latest
-    steps:
-      - uses: shallwefootball/s3-upload-action@master
+      - name: Upload website to Amazon S3
+        uses: shallwefootball/s3-upload-action@master
         with:
           aws_key_id: ${{ secrets.AWS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
