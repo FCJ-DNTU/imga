@@ -50,3 +50,4 @@ jobs:
           aws_bucket: ${{ secrets.AWS_BUCKET }}
           # Upload entire content of website to S3
           source_dir: "build/gui"
+          destination_dir: ""
