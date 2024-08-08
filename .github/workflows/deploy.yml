@@ -1,0 +1,55 @@
+# Name of flow
+name: Deploy to product environment
+
+# The event of github
+# When should it (workflows) run?
+on:
+  # Push to master or main
+  # and has type is `closed`, but it isn't enough
+  push:
+    branches: [master, main]
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      # Check out to repository
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      # Install NODEJS
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # Install dependencies
+      - run: npm install
+
+  build_website:
+    needs: prepare
+    runs-on: ubuntu-latest
+    steps:
+      # Build website with webpack
+      # The directory is build/gui
+      - run: npm run build
+
+  upload_to_s3:
+    needs: build_website
+    runs-on: ubuntu-latest
+    steps:
+      - uses: shallwefootball/s3-upload-action@master
+        with:
+          aws_key_id: ${{ secrets.AWS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+          aws_bucket: ${{ secrets.AWS_BUCKET }}
+          # Upload entire content of website to S3
+          source_dir: "build/gui"
