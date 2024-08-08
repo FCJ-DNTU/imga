@@ -1,11 +1,10 @@
-
-import { ScanText} from "../components/scan_text/Scan_text.js"
+import { ScanText } from "../components/scan_text/ScanText.js";
 
 // Định nghĩa hàm main
 /**
  * Hàm main
- * @param {HTMLDivElement} app 
- * @param utils 
+ * @param {HTMLDivElement} app
+ * @param utils
  */
 export function main(app, utils) {
   const scan = new ScanText(app, utils);
