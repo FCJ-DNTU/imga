@@ -42,6 +42,15 @@ jobs:
       - name: Build website
         run: npm run build
 
+      # Prepare AWS Credential
+      - name: Prepare AWS Credential
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws_key_id: ${{ secrets.AWS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+          aws-region: ${{ secrets.AWS_REGION}}
+
+      # Upload S3
       - name: Upload website to Amazon S3
         uses: shallwefootball/s3-upload-action@master
         with:
