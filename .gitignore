@@ -15,5 +15,4 @@ __pycache__
 
 package-lock.json
 
-test
 **/*.test.*
