@@ -19,7 +19,7 @@ from modules.myres import get_message
 builds_path = get_path("builds")
 
 # Gán đường dẫn tới file `tesseract.exe` vừa mới cài đặt ở bước trước vào đây.
-pytesseract.pytesseract.tesseract_cmd = builds_path + "/tesseract/tesseract.exe"
+# pytesseract.pytesseract.tesseract_cmd = builds_path + "/tesseract/tesseract.exe"
 
 # Định nghĩa hàm main
 def main():
