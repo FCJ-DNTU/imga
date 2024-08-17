@@ -6,6 +6,7 @@ import { Utils } from "../utils/index.js";
 export class MyServer {
   constructor(options) {
     this.port = options.port;
+    this.hostname = "0.0.0.0";
     this.app = express();
     this.instance = http.createServer(this.app);
     this.apis = [];
@@ -52,8 +53,10 @@ export class MyServer {
         "There aren't APIs in your server. Please add more APIs before start server."
       );
 
-    this.instance.listen(this.port, "0.0.0.0", () => {
-      console.log(`You're server is running on http://localhost:${this.port}`);
+    this.instance.listen(this.port, this.hostname, () => {
+      console.log(
+        `You're server is running on http://${this.hostname}:${this.port}`
+      );
     });
   }
 }

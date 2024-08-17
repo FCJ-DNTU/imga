@@ -1,20 +1,15 @@
 # Use node image
-FROM scratch
+FROM ubuntu:lastest
 
 # Change the working dir from /src to /root/app
-WORKDIR /backend
+WORKDIR /home/backend
 
 # Copy all to /app
-COPY . /backend
+COPY . .
 
-# Run bash script
-RUN node_install.sh
-RUN python_install.sh
+# Grant permission to sh files
+RUN chmod +x /home/backend/install.sh
+RUN chmod +x /home/backend/nodejs/scripts/install.sh
+RUN chmod +x /home/backend/python/scripts/install.sh
 
-# Expose application at PORT
-EXPOSE 3300
-
-RUN pwd
-
-# Start the app
-CMD ["bun", "src/index.js"]
+ENTRYPOINT ["/bin/bash", "-c", "/home/backend/install.sh"]
