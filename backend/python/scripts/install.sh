@@ -15,8 +15,8 @@ printf "Python has been just installed: $(python3 --version)"
 apt install python3-pip
 printf "PIP has just been installed: $(node -v)"
 
-## Move to `python`
-cd ../
+# Change directory to `backend`
+cd /home/backend/python
 
 ## Install packages in `requirements.txt`
 pip3 install -r requirements.txt
