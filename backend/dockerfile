@@ -1,5 +1,5 @@
 # Use node image
-FROM ubuntu:lastest
+FROM ubuntu:latest
 
 # Change the working dir from /src to /root/app
 WORKDIR /home/backend
