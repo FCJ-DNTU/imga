@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. /home/backend/utils.sh
+
 ## Update packages
 apt update
 
@@ -14,18 +16,20 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
-printf "NVM has just been installed: $(nvm -v)"
+# infoln "NVM has just been installed: $(nvm -v)"
 
 ### Install node 20
 nvm install node 20
 
+### Check version of `node` and `npm`
+infoln "Node has just been installed: $(node -v)"
+infoln "NPM has just been installed: $(npm -v)"
+
 ### Change directory to `nodejs`
 cd /home/backend/nodejs
-
-### Check version of `node` and `npm`
-printf "Node has just been installed: $(node -v)"
-printf "NPM has just been installed: $(npm -v)"
 
 ## Install packages in `package.json`
 npm install
 npm install -g pm2
+
+infoln "Install packages: $(npm list -g)"

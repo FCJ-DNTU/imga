@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. ./utils.sh
+. utils.sh
 
 # Change directory to `backend`
 infoln "Change directory to /home/backend"
