@@ -1,5 +1,5 @@
-import path from 'path';
-import { spawn } from 'child_process';
+import path from "path";
+import { spawn } from "child_process";
 
 // Define global
 const root = path.resolve("../");
@@ -13,32 +13,36 @@ export class PyProcess {
     BlurImage: root + "/python/blur_image.py",
     ChangeColorImage: root + "/python/change_color_image.py",
     FaceRecognition: root + "/python/face_recognition.py",
-    DatatableImageToText: root + "/python/datatable_image_to_text.py"
+    DatatableImageToText: root + "/python/datatable_image_to_text.py",
   };
 
   constructor() {}
 
   /**
    * Dùng phương thức này để tạo ra một python executer.
-   * @param {ScriptPathKeys} script 
-   * @param  {...any} args 
-   * @returns 
+   * @param {ScriptPathKeys} script
+   * @param  {...any} args
+   * @returns
    */
   exec(script, ...args) {
-    const py_process = spawn('python', [PyProcess.ScriptPaths[script], ...args]);
+    // Use python3 (Linux)
+    const py_process = spawn("python3", [
+      PyProcess.ScriptPaths[script],
+      ...args,
+    ]);
     try {
-      return new Promise(function(res, rej) {
-        py_process.stdout.on('data', (data) => {
+      return new Promise(function (res, rej) {
+        py_process.stdout.on("data", (data) => {
           data = data.toString();
           data = JSON.parse(data);
-          if(data.isDone) {
+          if (data.isDone) {
             res(data);
           } else {
             console.log(data);
           }
         });
-        
-        py_process.stderr.on('data', (data) => {
+
+        py_process.stderr.on("data", (data) => {
           data = data.toString();
           data = JSON.parse(data);
           console.error("PyProcess Error: ", data);
