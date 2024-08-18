@@ -11,15 +11,15 @@ apt install wget
 apt install python3
 printf "Python has been just installed: $(python3 --version)"
 
-### Install pip3
-apt install python3-pip
-printf "PIP has just been installed: $(node -v)"
+### Install `pip3` and `virtualenv`
+apt install python3-pip python3-virtualenv
+printf "PIP has just been installed: $(pip3 --version)"
+printf "virtualenv has just been installed: $(virtualenv --version)"
 
 # Change directory to `/home/backend/python`
 cd /home/backend/python
 
-## Install virtualenv and create virtual environment
-pip3 install virtualenv
+## Create virtual environment
 virtualenv venv
 source venv/bin/activate
 
