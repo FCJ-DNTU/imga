@@ -10,6 +10,7 @@ COPY . .
 # Grant permission to sh files
 RUN chmod +x /home/backend/install.sh
 RUN chmod +x /home/backend/nodejs/scripts/install.sh
+RUN chmod +x /home/backend/nodejs/scripts/start.sh
 RUN chmod +x /home/backend/python/scripts/install.sh
 
 ENTRYPOINT ["/bin/bash", "-c", "/home/backend/install.sh"]
