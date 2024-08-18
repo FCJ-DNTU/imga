@@ -22,6 +22,10 @@ infoln "Done!"
 # Change directory to `backend`
 cd /home/backend
 
+# Create `temp` and `uploads` folders
+mkdir temp
+mkdir uploads
+
 # Start server
 infoln "Booting server..."
 bash nodejs/scripts/start.sh
