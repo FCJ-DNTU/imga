@@ -47,9 +47,7 @@ export class PyProcess {
 
         py_process.stderr.on("data", (data) => {
           data = data.toString();
-          data = JSON.parse(data);
-          console.error("PyProcess Error: ", data);
-          rej({ message: "There are an error!" });
+          rej({ message: `There is an error! - ${data}` });
         });
       });
     } catch (error) {
