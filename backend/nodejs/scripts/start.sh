@@ -8,6 +8,8 @@ export NVM_DIR="$HOME/.nvm"
 # Change directory to `nodejs`
 cd /home/backend/nodejs
 
+export PYTHON_PATH="/home/backend/python/venv/bin/python"
+
 # Start NodeJS Server
 npm start
 

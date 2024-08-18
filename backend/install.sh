@@ -23,8 +23,10 @@ infoln "Done!"
 cd /home/backend
 
 # Create `temp` and `uploads` folders
+infoln "Create \`temp\` and \`uploads\` folders..."
 mkdir temp
 mkdir uploads
+infoln "Done!"
 
 # Start server
 infoln "Booting server..."

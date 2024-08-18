@@ -15,8 +15,13 @@ printf "Python has been just installed: $(python3 --version)"
 apt install python3-pip
 printf "PIP has just been installed: $(node -v)"
 
-# Change directory to `backend`
+# Change directory to `/home/backend/python`
 cd /home/backend/python
+
+## Install virtualenv and create virtual environment
+pip3 install virtualenv
+virtualenv venv
+source venv/bin/activate
 
 ## Install packages in `requirements.txt`
 pip3 install -r requirements.txt

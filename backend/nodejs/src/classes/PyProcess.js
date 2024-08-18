@@ -16,7 +16,9 @@ export class PyProcess {
     DatatableImageToText: root + "/python/datatable_image_to_text.py",
   };
 
-  constructor() {}
+  constructor() {
+    this.pythonPath = process.env.PYTHON_PATH || "python3";
+  }
 
   /**
    * Dùng phương thức này để tạo ra một python executer.
@@ -26,10 +28,11 @@ export class PyProcess {
    */
   exec(script, ...args) {
     // Use python3 (Linux)
-    const py_process = spawn("python3", [
+    const py_process = spawn(this.pythonPath, [
       PyProcess.ScriptPaths[script],
       ...args,
     ]);
+
     try {
       return new Promise(function (res, rej) {
         py_process.stdout.on("data", (data) => {
