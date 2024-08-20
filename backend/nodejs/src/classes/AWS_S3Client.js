@@ -8,7 +8,9 @@ import {
 
 export class AWS_S3Client {
   constructor() {
-    this._client = new S3Client();
+    this._client = new S3Client({
+      region: process.env.AWS_REGION,
+    });
   }
 
   async upload(bucketName, name, objectPath) {
@@ -31,8 +33,8 @@ export class AWS_S3Client {
       return { result: data };
     } catch (err) {
       // Log the detailed error for troubleshooting
-      console.error("Error put objects:", JSON.stringify(err, null, 2));
-      return Promise.reject(null);
+      console.error("Error put objects:", err);
+      return Promise.reject(err);
     }
   }
 
@@ -58,8 +60,8 @@ export class AWS_S3Client {
       return { objectKeys: objectKeys };
     } catch (err) {
       // Log the detailed error for troubleshooting
-      console.error("Error listing objects:", JSON.stringify(err, null, 2));
-      return Promise.reject(null);
+      console.error("Error listing objects:", err);
+      return Promise.reject(err);
     }
   }
 }

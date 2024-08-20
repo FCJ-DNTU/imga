@@ -11,6 +11,9 @@ cd /home/backend/nodejs
 export PYTHON_PATH="/home/backend/python/venv/bin/python"
 export TEMP_PATH="/home/backend/temp"
 export UPLOADS_PATH="/home/backend/uploads"
+
+## Setup AWS Resource Information
+export AWS_REGION="your_region"
 export BUCKET_NAME="your_bucket_name"
 
 # Start NodeJS Server

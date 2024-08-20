@@ -1,1 +1,1 @@
-export const API_ROOT = "http://ec2-47-129-229-78.ap-southeast-1.compute.amazonaws.com/api";
+export const API_ROOT = "http://ec2-54-169-204-208.ap-southeast-1.compute.amazonaws.com/api";

@@ -70,11 +70,7 @@ export const DatatableImageToExcelHandler = createHandler(
 
             // Upload ảnh lên S3
             s3Client
-              .upload(
-                bucketName,
-                image.filename,
-                path.resolve(image.path, image.filename)
-              )
+              .upload(bucketName, image.filename, path.resolve(image.path))
               .then(() => {
                 console.log("Image in", image.path, "is uploaded to S3");
                 // Tải lên rồi thì xóa ảnh và file.
