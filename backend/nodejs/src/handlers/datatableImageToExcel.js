@@ -69,14 +69,20 @@ export const DatatableImageToExcelHandler = createHandler(
             if (err) throw err;
 
             // Upload ảnh lên S3
-            s3Client.upload(bucketName, fileName, image.path).then(() => {
-              console.log("Image in", image.path, "is uploaded to S3");
-              // Tải lên rồi thì xóa ảnh và file.
-              fs.unlink(image.path, function (err) {
-                if (err) throw err;
-                console.log("Image in", image.path, " was deleted.");
+            s3Client
+              .upload(
+                bucketName,
+                image.filename,
+                path.resolve(image.path, image.filename)
+              )
+              .then(() => {
+                console.log("Image in", image.path, "is uploaded to S3");
+                // Tải lên rồi thì xóa ảnh và file.
+                fs.unlink(image.path, function (err) {
+                  if (err) throw err;
+                  console.log("Image in", image.path, " was deleted.");
+                });
               });
-            });
 
             fs.unlink(excelFileFullPath, function (err) {
               if (err) throw err;
