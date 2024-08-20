@@ -1,26 +1,33 @@
-import fs from 'fs';
-import excel from 'excel4node';
-import path from 'path';
+import fs from "fs";
+import excel from "excel4node";
+import path from "path";
 
 // Import from classes
-import { PyProcess } from '../classes/PyProcess.js';
+import { AWS_S3Client } from "../classes/AWS_S3Client.js";
+import { PyProcess } from "../classes/PyProcess.js";
 
-import { createHandler } from '../templates/handler/index.js';
+import { createHandler } from "../templates/handler/index.js";
 
-const tempFolderPath = path.resolve('../', 'temp');
+const tempFolderPath = path.resolve("../", "temp");
 
 export const DatatableImageToExcelHandler = createHandler(
   "/datatable_image_to_excel",
-  function({ Utils }) {
+  function ({ Utils }) {
     const pp = new PyProcess();
+    const s3Client = new AWS_S3Client();
     const workbook = new excel.Workbook();
-    return async function(req, res) {
+    const bucketName = process.env.BUCKET_NAME;
+
+    return async function (req, res) {
       try {
         let files = req.files;
         let image = files["image"][0];
         let fileName = image.filename.split(".")[0];
         let dataSheet = workbook.addWorksheet("Data");
-        let excelFileFullPath = path.resolve(tempFolderPath, fileName + ".xlsx");
+        let excelFileFullPath = path.resolve(
+          tempFolderPath,
+          fileName + ".xlsx"
+        );
         let currentRow = 1;
         let currentCol = 1;
 
@@ -33,8 +40,8 @@ export const DatatableImageToExcelHandler = createHandler(
         );
 
         // Thêm dữ liệu của từng ô vào trong worksheet.
-        for(let row of data.data) {
-          for(let cell of row) {
+        for (let row of data.data) {
+          for (let cell of row) {
             dataSheet.cell(currentCol, currentRow).string(cell);
             currentRow += 1;
           }
@@ -43,27 +50,37 @@ export const DatatableImageToExcelHandler = createHandler(
         }
 
         // Viết vào file.
-        workbook.write(excelFileFullPath, function(err) {
-          if(err) {
+        workbook.write(excelFileFullPath, function (err) {
+          if (err) {
             console.log(err);
             return;
           }
 
-          res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-          res.setHeader("Content-Disposition", "attachment; filename=" + fileName);
+          res.setHeader(
+            "Content-Type",
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+          );
+          res.setHeader(
+            "Content-Disposition",
+            "attachment; filename=" + fileName
+          );
 
-          return res.download(excelFileFullPath, function(err) {          
-            if(err) throw err;
+          return res.download(excelFileFullPath, function (err) {
+            if (err) throw err;
 
-            // Xóa ảnh và file.
-            fs.unlink(image.path, function(err) {
-              if(err) throw err;
-              console.log("Image in ", image.path, " was deleted.");
+            // Upload ảnh lên S3
+            s3Client.upload(bucketName, fileName, image.path).then(() => {
+              console.log("Image in", image.path, "is uploaded to S3");
+              // Tải lên rồi thì xóa ảnh và file.
+              fs.unlink(image.path, function (err) {
+                if (err) throw err;
+                console.log("Image in", image.path, " was deleted.");
+              });
             });
 
-            fs.unlink(excelFileFullPath, function(err) {
-              if(err) throw err;
-              console.log("File in ", excelFileFullPath, " was deleted.");
+            fs.unlink(excelFileFullPath, function (err) {
+              if (err) throw err;
+              console.log("File in", excelFileFullPath, " was deleted.");
             });
           });
         });
@@ -75,6 +92,6 @@ export const DatatableImageToExcelHandler = createHandler(
           Utils.RM.getResponseMessage(true, undefined, error.message)
         );
       }
-    }
+    };
   }
 );

@@ -9,6 +9,7 @@ export NVM_DIR="$HOME/.nvm"
 cd /home/backend/nodejs
 
 export PYTHON_PATH="/home/backend/python/venv/bin/python"
+export BUCKET_NAME="your_bucket_name";
 
 # Start NodeJS Server
 npm start
