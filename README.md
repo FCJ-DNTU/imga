@@ -17,7 +17,7 @@ There are some labs that I use and learn to build this project
 ## Infrastructure
 This diagram describes how my system look like in Cloud.
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/8219b828-562c-4b3d-bad0-a2a20ba7f680" />
+  <img src="https://github.com/user-attachments/assets/f3085d7c-b203-4646-a544-19fd6095d6da" />
 </p>
 
 Note: _Remember, this diagram is just the first version of my application (this version is used for workshop), I'll will draw my entire system in future in the **Development Orientation** section._
